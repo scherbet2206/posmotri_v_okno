@@ -9,6 +9,9 @@ html {
 }
 
 .page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   inline-size: 1200px;
   block-size: 100%;
   margin: auto;
@@ -48,10 +51,11 @@ ol {
 }
 
 .content {
+  width: 1140px;
   display: grid;
   grid-auto-flow: column;
   justify-content: space-between;
-  margin: 133px 30px;
+  margin: 0px 30px;
 }
 
 .result {
