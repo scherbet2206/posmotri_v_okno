@@ -59,8 +59,10 @@ ol {
 }
 
 .result {
-  max-width: 711px;
-  max-height: 386px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: flex-start;
   margin-top: 78px;
 }
 
@@ -68,14 +70,13 @@ ol {
   position: relative;
   display: block;
   overflow: hidden;
-  width: 100%;
-  height: 100%;
+  inline-size: 711px;
+  block-size: 386px;
   margin-bottom: 16px;
 }
 
 .result__video {
   width: 100%;
-  margin-top: -12px;
   object-fit: cover;
   object-position: center;
 }
@@ -83,40 +84,38 @@ ol {
 .search-form {
   width: 100%;
   display: grid;
-  grid-template-columns: 225px 212px 194px;
-  grid-column-gap: 40px;
+  grid-template-columns: auto auto auto;
   align-items: end;
+  justify-content: space-between;
 }
 
 .search-form__fieldset {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+  display: grid;
   align-items: start;
+  gap: 5px;
   width: 225px;
-  min-height: 54px;
   height: 100%;
   border: none;
 }
 
 .search-form__fieldset-title {
-  font-family: "Fira Sans Condensed", sans-serif;
+  font-family: inherit;
   font-weight: 400;
-  font-size: 18px;
+  font-size: inherit;
   line-height: 22px;
-  color: #fff;
+  color: inherit;
   width: 100%;
 }
 
 .search-form__textfield {
-  font-family: "Fira Sans Condensed", sans-serif;
+  font-family: inherit;
   border: none;
   background-color: transparent;
   font-weight: 400;
-  font-size: 18px;
+  font-size: inherit;
   line-height: 21.6px;
-  color: #fff;
-  width: 100%;
+  color: inherit;
+  width: 225px;
 }
 
 .search-form__textfield::placeholder {
@@ -124,26 +123,34 @@ ol {
   border-width: 1px 0px;
   border-style: solid;
   border-color: #fff;
-  font-family: "Fira Sans Condensed", sans-serif;
+  font-family: inherit;
   font-weight: 400;
-  font-size: 18px;
+  font-size: inherit;
   line-height: 22px;
+}
+
+.search-form__textfield:focus {
+  outline: none;
 }
 
 .search-form__label:has(:focus-visible) {
   outline: 1px solid #fff;
+  outline-offset: 1px;
 }
 
 .search-form__checkbox-list {
-  width: 100%;
+  width: 212px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  align-items: center;
   padding-bottom: 4px;
 }
 
 .search-form__label {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  width: fit-content;
 }
 
 .search-form__label:hover {
@@ -156,28 +163,35 @@ ol {
 }
 
 .search-form__checkbox + span {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 19px;
   height: 19px;
   background-color: transparent;
   border: #fff solid 1px;
   vertical-align: middle;
+  margin-right: 5px;
 }
 
 .search-form__checkbox:checked + span {
-  outline: 1px solid black;
+  /*outline: 1px solid black; 
   outline-offset: -2px;
   background-color: #fff;
+  Подскажите, пожалуйста, почему такой вариант некорректен?
+  По результату он не отличается от реализации ниже, даже будет универсален, если применять к др. размероам*/
+  outline: 7px solid white;
+  outline-offset: -10px;
 }
 
 .button {
   width: 194px;
   min-height: 34px;
-  border: 1px solid #fff;
+  border: 1px solid currentColor;
   background-color: transparent;
   color: #fff;
-  font-family: "Fira Sans Condensed", sans-serif;
-  font-size: 18px;
+  font-family: inherit;
+  font-size: inherit;
   font-weight: 700;
   line-height: 21.6px;
 }
@@ -216,23 +230,23 @@ ol {
 }
 
 .content__list {
+  display: grid;
+  position: relative;
+  overflow: auto; /* Изменила значение на рекомендованное, но теперь появились гориз.+верт.скроллы. 
+  Как в таком случае поступают - расширяют контейнер, ужимают конетнт или что-то еще? */
   box-sizing: border-box;
   height: 298px;
-  overflow: hidden;
-  display: grid;
-  gap: 30px;
-  position: relative;
   padding-left: 2px;
   padding-top: 2px;
 }
 
-.content__list:hover {
-  overflow-y: auto;
-}
-
 .content__list-item {
   width: 394px;
-  min-height: 103px;
+  height: auto;
+}
+
+.content__list-item:not(:last-of-type) {
+  margin-bottom: 30px;
 }
 
 .content__card-link {
@@ -244,6 +258,8 @@ ol {
 .content__card-link:hover {
   text-decoration: underline;
   color: #fff;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 .content__card-link:focus {
@@ -255,9 +271,6 @@ ol {
 }
 
 .content__card-link_current {
-  display: block;
-  width: 100%;
-  height: 100%;
   background-color: #545050;
   box-shadow: -2px -2px #545050, -2px 2px #545050;
 }
@@ -270,11 +283,15 @@ ol {
 }
 
 .content__video-card-description-container {
-  width: 100%;
+  max-width: 200px;
   height: auto;
 }
 
 .content__video-card-title {
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   font-family: "Oswald", sans-serif;
   font-weight: 700;
   font-size: 30px;
@@ -283,21 +300,17 @@ ol {
 }
 
 .content__video-card-description {
-  font-family: "Fira Sans Condensed", sans-serif;
+  width: 100%;
+  font-family: inherit;
   font-weight: 400;
-  font-size: 18px;
+  font-size: inherit;
   line-height: 16px;
   color: #fff;
 }
 
-.content__video-preview {
+.content__video-card-thumbnail {
   width: 194px;
   height: 103px;
-}
-
-.content__video-card-thumbnail {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
   object-position: center;
 }
