@@ -51,10 +51,9 @@ ol {
 }
 
 .content {
-  width: 1140px;
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: space-between;
+  width: 100%;
+  display: flex;
+  gap: 30px;
   margin: 0px 30px;
 }
 
@@ -77,6 +76,7 @@ ol {
 
 .result__video {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
 }
@@ -93,7 +93,6 @@ ol {
   display: grid;
   align-items: start;
   gap: 5px;
-  width: 225px;
   height: 100%;
   border: none;
 }
@@ -139,11 +138,9 @@ ol {
 }
 
 .search-form__checkbox-list {
-  width: 212px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 15px;
   padding-bottom: 4px;
 }
 
@@ -175,11 +172,6 @@ ol {
 }
 
 .search-form__checkbox:checked + span {
-  /*outline: 1px solid black; 
-  outline-offset: -2px;
-  background-color: #fff;
-  Подскажите, пожалуйста, почему такой вариант некорректен?
-  По результату он не отличается от реализации ниже, даже будет универсален, если применять к др. размероам*/
   outline: 7px solid white;
   outline-offset: -10px;
 }
@@ -206,13 +198,17 @@ ol {
   outline: none;
 }
 
-.button:focus-visible {
+.button:active {
   background-color: #545050;
   text-decoration: none;
 }
 
+.button:focus-visible {
+  outline: 1px solid #fff;
+}
+
 .content__details {
-  width: 399px;
+  width: 100%;
 }
 
 .title {
@@ -232,8 +228,7 @@ ol {
 .content__list {
   display: grid;
   position: relative;
-  overflow: auto; /* Изменила значение на рекомендованное, но теперь появились гориз.+верт.скроллы. 
-  Как в таком случае поступают - расширяют контейнер, ужимают конетнт или что-то еще? */
+  overflow: auto;
   box-sizing: border-box;
   height: 298px;
   padding-left: 2px;
@@ -241,7 +236,6 @@ ol {
 }
 
 .content__list-item {
-  width: 394px;
   height: auto;
 }
 
@@ -258,8 +252,16 @@ ol {
 .content__card-link:hover {
   text-decoration: underline;
   color: #fff;
-  background-color: transparent;
   box-shadow: none;
+}
+
+.content__card-link_current:hover {
+  background-color: transparent;
+}
+
+.content__card-link:active {
+  background-color: #545050;
+  box-shadow: -2px -2px #545050, -2px 2px #545050;
 }
 
 .content__card-link:focus {
